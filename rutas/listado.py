@@ -3,7 +3,7 @@ from tkinter.ttk import Treeview
 
 class VentanaListadoLibros:
     
-    def __init__(self, padron):
+    def __init__(self, biblioteca):
         
         self.ventana = Tk()
         
@@ -19,7 +19,7 @@ class VentanaListadoLibros:
         grilla.heading("D",text="estado")
         grilla.pack(fill=BOTH)
         
-        for p in padron.libros:
+        for p in biblioteca.libros:
             grilla.insert("", END, values = (p.codigo, p.titulo, p.precio, p.estado))        
         
         

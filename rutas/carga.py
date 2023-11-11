@@ -2,13 +2,13 @@ from tkinter import *
 from tkinter import messagebox
 from listado import VentanaListadoLibros
 
-from persona import Libro
+from libro import Libro
 
 
 class VentanaCarga():
     
-    def __init__(self, padron):
-        self.padron = padron
+    def __init__(self, biblioteca):
+        self.biblioteca = biblioteca
         
         self.ventana = Tk()
         self.ventana.title("Cargar Libro")
@@ -50,12 +50,12 @@ class VentanaCarga():
         estado = self.estado.get()
         nueva = Libro(codigo, titulo, precio, estado)
         messagebox.showinfo("Libro cargado", str(nueva))
-        self.padron.agregar(nueva)
+        self.biblioteca.agregar(nueva)
         self.codigo.set("")
         self.titulo.set("")
         self.precio.set("")
         self.estado.set("")
         
     def listar(self):
-        VentanaListadoLibros(self.padron).mostrar()
+        VentanaListadoLibros(self.biblioteca).mostrar()
 

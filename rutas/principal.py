@@ -1,6 +1,7 @@
 from carga import VentanaCarga
-from listado import VentanaListadoLibros
-from padron import Padron
+from biblioteca import Biblioteca
 
-padron = Padron()
-VentanaCarga(padron).mostrar()
+biblioteca = Biblioteca()
+VentanaCarga(biblioteca).mostrar()
+
+
