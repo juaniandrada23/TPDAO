@@ -11,11 +11,9 @@ class VentanaPrincipal():
         botonera = Frame()
         botonera.pack(side=BOTTOM)
 
-        Button(botonera, text="Administrar Libros").pack(side=LEFT)
-        Button(botonera, text="Administrar Socios").pack(side=LEFT)
-        Button(botonera, text="Generar Reportes").pack(side=LEFT)
-
-        self.ventana.mainloop()
+        Button(botonera, text="Administrar Libros").pack(side=TOP)
+        Button(botonera, text="Administrar Socios").pack(side=TOP)
+        Button(botonera, text="Generar Reportes").pack(side=TOP)
     
     def mostrar(self):
         self.ventana.mainloop()
