@@ -1,5 +1,8 @@
 from tkinter import *
 from tkinter import messagebox
+from carga import VentanaCarga
+from biblioteca import Biblioteca
+biblioteca = Biblioteca()
 
 class VentanaPrincipal():
     
@@ -9,11 +12,15 @@ class VentanaPrincipal():
         self.ventana.geometry("600x400")
 
         botonera = Frame()
-        botonera.pack(side=BOTTOM)
+        botonera.pack(side=LEFT)
+        Button(botonera, text="Administrar Libros",command=self.abrir_ventana_carga).grid(row=0, column=0)
+        Button(botonera, text="Administrar Socios").grid(row=1, column=0)
+        Button(botonera, text="Generar Reportes").grid(row=2, column=0)
 
-        Button(botonera, text="Administrar Libros").pack(side=TOP)
-        Button(botonera, text="Administrar Socios").pack(side=TOP)
-        Button(botonera, text="Generar Reportes").pack(side=TOP)
+   
+    def abrir_ventana_carga(self):
+        ventana_carga = VentanaCarga(biblioteca)
+        ventana_carga.mostrar()
     
     def mostrar(self):
         self.ventana.mainloop()
