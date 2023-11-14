@@ -13,7 +13,7 @@ class VentanaCarga():
         
         self.ventana = Toplevel()
         self.ventana.title("Cargar Libro")
-        self.ventana.geometry("600x400")
+        self.ventana.geometry("400x400")
         
         ingresos = Frame(self.ventana)
         ingresos.grid(row=0, column=0)
