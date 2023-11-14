@@ -28,11 +28,11 @@ class VentanaPrincipal():
         contenedor_principal.pack(expand=True, fill='both')
 
         # msjbienvenida
-        self.mensaje_bienvenida = Label(contenedor_principal, text="Bienvenido usuario", font=('Monserrat', 14), bg='#778DA9')
+        self.mensaje_bienvenida = Label(contenedor_principal, text="Bienvenido usuario", font=('Monserrat', 12, 'bold'), bg='#778DA9')
         self.mensaje_bienvenida.place(x=400, y=15, anchor=NW)
 
         # Mostrar el horario actual
-        self.label_horario = Label(contenedor_principal, text="", font=('Monserrat', 14), bg='#778DA9')
+        self.label_horario = Label(contenedor_principal, text="", font=('Monserrat', 12, 'bold'), bg='#778DA9')
         self.label_horario.place(x=377, y=40, anchor=NW)
 
         # Iniciar la actualización del horario
