@@ -1,27 +1,42 @@
 from tkinter import *
 from tkinter.ttk import Treeview
+from tkinter import ttk
 
 class VentanaListadoLibros:
     
     def __init__(self, biblioteca):
-        
         self.ventana = Tk()
-        
-        grilla = Treeview(self.ventana,columns=("A", "B", "C", "D"), height=200)
-        grilla.column("#0",width=0)
-        grilla.column("A",width=50)
-        grilla.column("B",width=150)
-        grilla.column("C",width=150)
-        grilla.column("D",width=50)
-        grilla.heading("A",text="codigo")        
-        grilla.heading("B",text="titulo")        
-        grilla.heading("C",text="precio")        
-        grilla.heading("D",text="estado")
+        self.ventana.title("Listado de Libros")
+        self.ventana.geometry("500x300")
+
+        self.configurar_estilos()
+
+        grilla = Treeview(self.ventana, columns=("A", "B", "C", "D"), height=400)
+        grilla.column("#0", width=0, stretch=NO)  # ancho en 0
+        grilla.column("A", width=100)
+        grilla.column("B", width=100)
+        grilla.column("C", width=100)
+        grilla.column("D", width=100)
+        grilla.heading("#0", text="", anchor=W)  # encabezado vacio
+        grilla.heading("A", text="Código")        
+        grilla.heading("B", text="Título")        
+        grilla.heading("C", text="Precio")        
+        grilla.heading("D", text="Estado")
         grilla.pack(fill=BOTH)
-        
-        for p in biblioteca.libros:
-            grilla.insert("", END, values = (p.codigo, p.titulo, p.precio, p.estado))        
-        
-        
+
+        for libro in biblioteca.libros:
+            grilla.insert("", END, values=(libro.codigo, libro.titulo, libro.precio, libro.estado))
+
+    def configurar_estilos(self):
+        style = ttk.Style()
+        style.configure("Treeview.heading",
+                        background="#E0E1DD",
+                        foreground="black",
+                        fieldbackground="#E0E1DD",
+                        font=('Monserrat', 10, 'bold'))
+
+        style.map("Treeview",
+                  background=[('selected', '#2980b9')])
+
     def mostrar(self):
         self.ventana.mainloop()
