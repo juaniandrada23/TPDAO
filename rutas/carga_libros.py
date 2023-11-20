@@ -3,6 +3,7 @@ from tkinter import messagebox
 from tkinter import ttk
 from listado import VentanaListadoLibros
 from libro import Libro
+from libro_controller import *
 
 class VentanaCarga():
     
@@ -43,9 +44,9 @@ class VentanaCarga():
         Entry(ingresos, textvariable=self.codigo).grid(row=0, column=1)
         Entry(ingresos, textvariable=self.titulo).grid(row=1, column=1)
         Entry(ingresos, textvariable=self.precio).grid(row=2, column=1)
-        combo = ttk.Combobox(ingresos, values=['Disponible', 'Prestado', 'Extraviado'], state="readonly")
-        combo.current(0)
-        combo.grid(row=3, column=1)
+        self.combo = ttk.Combobox(ingresos, values=['disponible', 'prestado', 'extraviado'], state="readonly")
+        self.combo.current(0)
+        self.combo.grid(row=3, column=1)
 
         ttk.Button(botonera, text="Aceptar", command=self.aceptar).place(x=5, y=20)
         ttk.Button(botonera, text="Cancelar", command=self.ventana.destroy).place(x=154, y=20)
@@ -58,10 +59,11 @@ class VentanaCarga():
         codigo = int(self.codigo.get())
         titulo = self.titulo.get()
         precio = self.precio.get()
-        estado = self.estado.get()
-        nueva = Libro(codigo, titulo, precio, estado)
-        messagebox.showinfo("Libro cargado", str(nueva))
-        self.biblioteca.agregar(nueva)
+        estado = self.combo.get()
+        nuevoLibro = Libro(codigo, titulo, precio, estado)
+        registrarLibro(nuevoLibro)
+        messagebox.showinfo("Libro cargado", str(nuevoLibro))
+        #self.biblioteca.agregar(nuevoLibro)
         self.codigo.set("")
         self.titulo.set("")
         self.precio.set("")

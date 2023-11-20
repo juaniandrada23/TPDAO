@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
-from carga import VentanaCarga
+from carga_libros import VentanaCarga
+from carga_socios import VentanaCargaSocios
 from biblioteca import Biblioteca
 import time
 biblioteca = Biblioteca()
@@ -48,11 +49,11 @@ class VentanaPrincipal():
         self.users_icon = PhotoImage(file="images/usuario.png").subsample(15, 15)
 
         # botones
-        ttk.Button(botonera, text="Administrar Libros", image=self.books_icon, compound="left", command=self.abrir_ventana_carga).grid(row=0, column=0, pady=10, padx=10)
-        ttk.Button(botonera, text="Administrar Socios", image=self.users_icon, compound="left").grid(row=1, column=0, pady=10)
+        ttk.Button(botonera, text="Administrar Libros", image=self.books_icon, compound="left", command=self.abrir_ventana_carga_libros).grid(row=0, column=0, pady=10, padx=10)
+        ttk.Button(botonera, text="Administrar Socios", image=self.users_icon, compound="left", command=self.abrir_ventana_carga_socios).grid(row=1, column=0, pady=10)
         ttk.Button(botonera, text="Generar Reportes", image=self.reports_icon, compound="left").grid(row=2, column=0, pady=10)
 
-    def abrir_ventana_carga(self):
+    def abrir_ventana_carga_libros(self):
         ventana_carga = VentanaCarga(biblioteca)
         ventana_carga.mostrar()
 
@@ -61,6 +62,10 @@ class VentanaPrincipal():
         self.label_horario.config(text=f"Horario actual: {horario_actual}")
         self.ventana.after(1000, self.actualizar_horario)
 
+    def abrir_ventana_carga_socios(self):
+        ventana_carga = VentanaCargaSocios()
+        ventana_carga.mostrar()
+        
     def mostrar(self):
         self.ventana.mainloop()
         

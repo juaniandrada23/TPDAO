@@ -25,7 +25,7 @@ class VentanaListadoLibros:
         grilla.pack(fill=BOTH)
 
         for libro in biblioteca.libros:
-            grilla.insert("", END, values=(libro.codigo, libro.titulo, libro.precio, libro.estado))
+            grilla.insert("", END, values=(libro[0], libro[1], libro[2], libro[3]))
 
     def configurar_estilos(self):
         style = ttk.Style()
