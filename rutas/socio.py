@@ -3,6 +3,7 @@ class Socio:
         self.dni = dni
         self.nombre = nombre
         self.apellido = apellido
+        self.prestamos = []
     
     def getDni(self):
         return self.dni
@@ -13,5 +14,9 @@ class Socio:
     def getApellido(self):
         return self.apellido
 
+    def registrar_prestamo(self, prestamo):
+        self.prestamos.append(prestamo)
+    
+    
     def __str__(self) -> str:
         return f"{self.dni} {self.nombre} {self.apellido}"

@@ -1,7 +1,7 @@
 import sqlite3 as sql
 from socio import Socio
 
-def createTable():
+def createTableSocio():
     conn = sql.connect("biblioteca.db")
     cursor = conn.cursor()
     cursor.execute(
@@ -37,6 +37,19 @@ def leerDatosSocio():
     conn.commit()
     conn.close()
     return datos
+
+def buscarSocio(dni):
+    conn = sql.connect("biblioteca.db")
+    cursor = conn.cursor()
+    query = f"SELECT * FROM Socios WHERE dni = {dni}"
+    cursor.execute(query)
+    datos = cursor.fetchall()
+    conn.commit()
+    conn.close()
+    if len(datos) > 0:
+        return True
+    else: 
+        return False
 
 
 # if __name__ == "__main__":

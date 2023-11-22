@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from carga_libros import VentanaCarga
 from carga_socios import VentanaCargaSocios
+from carga_prestamo import VentanaCargaPrestamos
 from biblioteca import Biblioteca
 import time
 biblioteca = Biblioteca()
@@ -43,6 +44,10 @@ class VentanaPrincipal():
         botonera = Frame(contenedor_principal, bg='#415A77', width=150)
         botonera.pack(side=LEFT, fill='y')
 
+        # botonera para prestamos
+        botonera_prestamo = Frame(contenedor_principal, bg='#A6A6A6', width=150)
+        botonera_prestamo.pack(side=RIGHT, fill='y')
+        
         # iconos
         self.books_icon = PhotoImage(file="images/libros.png").subsample(15, 15)
         self.reports_icon = PhotoImage(file="images/reporte.png").subsample(15, 15)
@@ -52,6 +57,9 @@ class VentanaPrincipal():
         ttk.Button(botonera, text="Administrar Libros", image=self.books_icon, compound="left", command=self.abrir_ventana_carga_libros).grid(row=0, column=0, pady=10, padx=10)
         ttk.Button(botonera, text="Administrar Socios", image=self.users_icon, compound="left", command=self.abrir_ventana_carga_socios).grid(row=1, column=0, pady=10)
         ttk.Button(botonera, text="Generar Reportes", image=self.reports_icon, compound="left").grid(row=2, column=0, pady=10)
+        ttk.Button(botonera_prestamo, text="Registrar Prestamo", image=self.books_icon, compound="left", command=self.abrir_ventana_carga_prestamos).grid(row=2, column=0, pady=10, padx=10)
+
+
 
     def abrir_ventana_carga_libros(self):
         ventana_carga = VentanaCarga(biblioteca)
@@ -64,6 +72,10 @@ class VentanaPrincipal():
 
     def abrir_ventana_carga_socios(self):
         ventana_carga = VentanaCargaSocios()
+        ventana_carga.mostrar()
+
+    def abrir_ventana_carga_prestamos(self):
+        ventana_carga = VentanaCargaPrestamos()
         ventana_carga.mostrar()
         
     def mostrar(self):

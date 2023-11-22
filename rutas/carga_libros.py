@@ -56,6 +56,7 @@ class VentanaCarga():
         self.ventana.mainloop()
 
     def aceptar(self):
+        createTableLibro()
         codigo = int(self.codigo.get())
         titulo = self.titulo.get()
         precio = self.precio.get()

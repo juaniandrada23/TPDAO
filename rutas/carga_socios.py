@@ -52,7 +52,7 @@ class VentanaCargaSocios():
         self.ventana.mainloop()
 
     def aceptar(self):
-        createTable()
+        createTableSocio()
         dni = int(self.dni.get())
         nombre = self.nombre.get()
         apellido = self.apellido.get()
