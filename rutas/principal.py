@@ -1,5 +1,5 @@
 from ventana_principal import VentanaPrincipal
-from carga_libros import VentanaCarga
+from ventana_libros import VentanaCargaLibros
 from biblioteca import Biblioteca
 
 #biblioteca = Biblioteca()

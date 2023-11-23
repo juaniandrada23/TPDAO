@@ -1,14 +1,12 @@
 from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk
-from listado import VentanaListadoLibros
 from socio import Socio
 from socio_controller import *
 
 class VentanaCargaSocios():
     
     def __init__(self):
-        # self.biblioteca = biblioteca
         
         self.ventana = Toplevel()
         self.ventana.title("Registrar Socios")

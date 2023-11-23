@@ -53,3 +53,45 @@ def leerDatosPrestamo():
     conn.commit()
     conn.close()
     return datos
+
+def puedeTomarPrestado(dni):
+    conn = sql.connect("biblioteca.db")
+    cursor = conn.cursor()
+    query = f"SELECT * FROM Prestamos WHERE id_socio={dni}"
+    cursor.execute(query)
+    datos = cursor.fetchall()
+    conn.commit()
+    conn.close()
+    if len(datos) < 3: 
+        return True
+    else: 
+        return False
+    
+def getTituloLibroPrestado(codigo):
+    conn = sql.connect("biblioteca.db")
+    cursor = conn.cursor()
+    query = f"SELECT codigo_libro FROM Prestamos WHERE codigo_libro={codigo}"
+    cursor.execute(query)
+    datos = cursor.fetchall()
+    conn.commit()
+    conn.close()
+    return datos
+
+def eliminarPrestamo(codigo):
+    conn = sql.connect("biblioteca.db")
+    cursor = conn.cursor()
+    query = f"DELETE FROM Prestamos WHERE codigo_libro={codigo}"
+    cursor.execute(query)
+    conn.commit()
+    conn.close()
+
+def getLibrosDemorados():
+    conn = sql.connect("biblioteca.db")
+    cursor = conn.cursor()
+    query = f"SELECT codigo_libro FROM Prestamos WHERE dias_retraso > 30"
+    cursor.execute(query)
+    datos = cursor.fetchall()
+    conn.commit()
+    conn.close()
+    array = [item[0] for item in datos]
+    return array

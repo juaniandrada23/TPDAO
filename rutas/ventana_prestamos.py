@@ -1,7 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk
-from listado import VentanaListadoLibros
 from prestamos import Prestamo
 from prestamo_controller import *
 from socio_controller import *
@@ -55,19 +54,21 @@ class VentanaCargaPrestamos():
     def aceptar(self):
         if buscarSocio(self.getInputDni()):
             if buscarLibroDisponible(self.getInputCodigo(),'disponible'):
-                createTablePrestamo()
-                codigo = int(self.codigo.get())
-                dni = int(self.dni.get())
-                dias = int(self.dias.get())
-                nuevoPrestamo = Prestamo(codigo, dni, dias)
-                registrarPrestamo(nuevoPrestamo)
-                actualizarEstado(codigo,"prestado")
-                messagebox.showinfo("", "Prestamo registrado con éxito")
-                print(nuevoPrestamo.registrar_devolucion())
-                self.codigo.set("")
-                self.codigo.set("")
-                self.dni.set("")
-                self.dias.set("")
+                if puedeTomarPrestado(self.getInputDni()):
+                    createTablePrestamo()
+                    codigo = int(self.codigo.get())
+                    dni = int(self.dni.get())
+                    dias = int(self.dias.get())
+                    nuevoPrestamo = Prestamo(codigo, dni, dias)
+                    registrarPrestamo(nuevoPrestamo)
+                    actualizarEstado(codigo,"prestado")
+                    messagebox.showinfo("", "Prestamo registrado con éxito")
+                    self.codigo.set("")
+                    self.codigo.set("")
+                    self.dni.set("")
+                    self.dias.set("")
+                else:
+                    messagebox.showinfo("Error","El socio ya tiene 3 libros prestados")
             else:
                 messagebox.showinfo("Error","El libro no se encuentra disponible")   
         else:

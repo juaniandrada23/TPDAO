@@ -1,5 +1,6 @@
 import sqlite3 as sql
 from libro import Libro
+from prestamo_controller import *
 
 def createBd():
     conn = sql.connect("biblioteca.db")
@@ -74,20 +75,18 @@ def actualizarEstado(codigo,estado):
     query = f"UPDATE Libros SET estado = '{estado}' WHERE codigo = {codigo}"
     cursor.execute(query)
     conn.commit()
-    conn.close() 
-    
+    conn.close()
 
-
-# if __name__ == "__main__":
-#     #createBd()
-#     #createTable()
-#     #insertarLibro(1,"Harry Potter",980,"disponible")
-#     libros = [(2,"G Beder",150,"prestado"),
-#               (3,"Paren La Hand",431,"disponible"),
-#               (4,"Don Quijote",1028,"disponible"),
-#               (5,"Fisica 2",120,"extraviado")]
+def listarLibrosDemorados():
+    codigosDemorados = getLibrosDemorados()
+    array = []
+    for c in codigosDemorados:
+        conn = sql.connect("biblioteca.db")
+        cursor = conn.cursor()
+        query = f"SELECT * FROM Libros WHERE codigo={c}"
+        cursor.execute(query)
+        array.append(cursor.fetchall())
+        conn.commit()
+        conn.close()
+    return array
     
-#     insertarLibros(libros)
-    
-    
-#     leerDatosLibro()

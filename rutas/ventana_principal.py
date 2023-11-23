@@ -1,8 +1,9 @@
 from tkinter import *
 from tkinter import ttk
-from carga_libros import VentanaCarga
-from carga_socios import VentanaCargaSocios
-from carga_prestamo import VentanaCargaPrestamos
+from ventana_libros import VentanaCargaLibros
+from ventana_socios import VentanaCargaSocios
+from ventana_prestamos import VentanaCargaPrestamos
+from ventana_devolucion import VentanaCargaDevolucion
 from biblioteca import Biblioteca
 import time
 biblioteca = Biblioteca()
@@ -58,11 +59,13 @@ class VentanaPrincipal():
         ttk.Button(botonera, text="Administrar Socios", image=self.users_icon, compound="left", command=self.abrir_ventana_carga_socios).grid(row=1, column=0, pady=10)
         ttk.Button(botonera, text="Generar Reportes", image=self.reports_icon, compound="left").grid(row=2, column=0, pady=10)
         ttk.Button(botonera_prestamo, text="Registrar Prestamo", image=self.books_icon, compound="left", command=self.abrir_ventana_carga_prestamos).grid(row=2, column=0, pady=10, padx=10)
+        ttk.Button(botonera_prestamo, text="Devolver Libro", image=self.books_icon, compound="left", command=self.abrir_ventana_carga_devolucion).grid(row=3, column=0, pady=10, padx=10)
+
 
 
 
     def abrir_ventana_carga_libros(self):
-        ventana_carga = VentanaCarga(biblioteca)
+        ventana_carga = VentanaCargaLibros(biblioteca)
         ventana_carga.mostrar()
 
     def actualizar_horario(self):
@@ -77,7 +80,11 @@ class VentanaPrincipal():
     def abrir_ventana_carga_prestamos(self):
         ventana_carga = VentanaCargaPrestamos()
         ventana_carga.mostrar()
-        
+    
+    def abrir_ventana_carga_devolucion(self):
+        ventana_carga = VentanaCargaDevolucion()
+        ventana_carga.mostrar()
+
     def mostrar(self):
         self.ventana.mainloop()
         

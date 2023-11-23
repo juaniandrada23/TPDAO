@@ -4,6 +4,7 @@ class Biblioteca():
     
     def __init__(self):
         self.libros = leerDatosLibro()
+        self.libros_extraviados = listarLibrosDemorados()
         self.socios = []
         
     def agregar(self,libro):

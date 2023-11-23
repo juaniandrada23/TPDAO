@@ -1,18 +1,19 @@
 from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk
-from listado import VentanaListadoLibros
+from listado_libros import VentanaListadoLibros
+from listado_extraviados import VentanaListadoExtraviados
 from libro import Libro
 from libro_controller import *
 
-class VentanaCarga():
+class VentanaCargaLibros():
     
     def __init__(self, biblioteca):
         self.biblioteca = biblioteca
         
         self.ventana = Toplevel()
         self.ventana.title("Cargar Libro")
-        self.ventana.geometry("400x200")
+        self.ventana.geometry("600x300")
 
         style = ttk.Style()
         style.configure("TButton",
@@ -51,6 +52,8 @@ class VentanaCarga():
         ttk.Button(botonera, text="Aceptar", command=self.aceptar).place(x=5, y=20)
         ttk.Button(botonera, text="Cancelar", command=self.ventana.destroy).place(x=154, y=20)
         ttk.Button(botonera, text="Listar", command=self.listar).place(x=300, y=20)
+        ttk.Button(botonera, text="Listar Extraviados", command=self.listarExtraviados).place(x=440, y=20)
+        #ttk.Button(botonera, text="Disponibilizar", command=self.disponible).place(x=400, y=20)
 
     def mostrar(self):
         self.ventana.mainloop()
@@ -64,7 +67,6 @@ class VentanaCarga():
         nuevoLibro = Libro(codigo, titulo, precio, estado)
         registrarLibro(nuevoLibro)
         messagebox.showinfo("Libro cargado", str(nuevoLibro))
-        #self.biblioteca.agregar(nuevoLibro)
         self.codigo.set("")
         self.titulo.set("")
         self.precio.set("")
@@ -72,3 +74,9 @@ class VentanaCarga():
 
     def listar(self):
         VentanaListadoLibros(self.biblioteca).mostrar()
+    
+    def listarExtraviados(self):
+        VentanaListadoExtraviados(self.biblioteca).mostrar()
+    
+    #def disponible(self):
+        #actualizarEstado(0,'disponible')
