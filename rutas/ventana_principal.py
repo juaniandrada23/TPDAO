@@ -6,6 +6,7 @@ from ventana_prestamos import VentanaCargaPrestamos
 from ventana_devolucion import VentanaCargaDevolucion
 from biblioteca import Biblioteca
 import time
+
 biblioteca = Biblioteca()
 
 class VentanaPrincipal():
@@ -74,7 +75,7 @@ class VentanaPrincipal():
         self.ventana.after(1000, self.actualizar_horario)
 
     def abrir_ventana_carga_socios(self):
-        ventana_carga = VentanaCargaSocios()
+        ventana_carga = VentanaCargaSocios(biblioteca)
         ventana_carga.mostrar()
 
     def abrir_ventana_carga_prestamos(self):

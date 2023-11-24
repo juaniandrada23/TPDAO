@@ -2,33 +2,32 @@ from tkinter import *
 from tkinter.ttk import Treeview
 from tkinter import ttk
 from tkinter import messagebox
-from libro_controller import *
+from socio_controller import *
 
-class VentanaListadoExtraviados:
+class VentanaListadoSocios:
     
     def __init__(self, biblioteca):
         self.ventana = Tk()
-        self.ventana.title("Listado de Libros")
+        self.ventana.title("Listado de Socios")
         self.ventana.geometry("500x300")
+        self.biblioteca = biblioteca
 
         self.configurar_estilos()
 
-        self.grilla = Treeview(self.ventana, columns=("A", "B", "C", "D"), height=400)
+        self.grilla = Treeview(self.ventana, columns=("A", "B", "C"), height=400)
         self.grilla.column("#0", width=0, stretch=NO)  # ancho en 0
         self.grilla.column("A", width=100)
         self.grilla.column("B", width=100)
         self.grilla.column("C", width=100)
-        self.grilla.column("D", width=100)
         self.grilla.heading("#0", text="", anchor=W)  # encabezado vacio
-        self.grilla.heading("A", text="Código")        
-        self.grilla.heading("B", text="Título")        
-        self.grilla.heading("C", text="Precio")        
-        self.grilla.heading("D", text="Estado")
+        self.grilla.heading("A", text="Dni")        
+        self.grilla.heading("B", text="Nombre")        
+        self.grilla.heading("C", text="Apellido")        
         self.grilla.pack(fill=BOTH)
-        self.grilla.bind("<Double-1>",self.cambiarAExtraviado)
+        self.grilla.bind("<Double-1>",self.eliminarFila)
 
-        for libro in biblioteca.libros_extraviados:
-            self.grilla.insert("", END, values=(libro[0][0], libro[0][1], libro[0][2], libro[0][3]))
+        for socio in self.biblioteca.socios:
+            self.grilla.insert("", END, values=(socio[0], socio[1], socio[2]))
 
     def configurar_estilos(self):
         style = ttk.Style()
@@ -41,13 +40,15 @@ class VentanaListadoExtraviados:
         style.map("Treeview",
                   background=[('selected', '#2980b9')])
 
-    def cambiarAExtraviado(self,event):
+    def eliminarFila(self,event):
         item = self.grilla.focus()
         x = messagebox.askquestion('Información','¿Seguro que desea eliminar el socio?')
-        codigo_libro = self.grilla.item(item)['values'][0]
+        dniSeleccionado = self.grilla.item(item)['values'][0]
         if x == 'yes':
-            self.grilla.set(item, column="D", value="extraviado")
-            actualizarEstado(codigo_libro,'extraviado')
-    
+            self.grilla.delete(item)
+            eliminarSocio(dniSeleccionado)
+
+
+
     def mostrar(self):
         self.ventana.mainloop()

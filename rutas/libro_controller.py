@@ -68,6 +68,19 @@ def buscarLibroDisponible(codigo,estado):
     else: 
         return False
 
+def buscarLibro(codigo,titulo):
+    conn = sql.connect("biblioteca.db")
+    cursor = conn.cursor()
+    query = f"SELECT * FROM Libros WHERE codigo = {codigo} AND titulo='{titulo}'"
+    cursor.execute(query)
+    datos = cursor.fetchall()
+    conn.commit()
+    conn.close()
+    if len(datos) > 0:
+        return True
+    else: 
+        return False
+
 
 def actualizarEstado(codigo,estado):
     conn = sql.connect("biblioteca.db")
@@ -89,4 +102,12 @@ def listarLibrosDemorados():
         conn.commit()
         conn.close()
     return array
-    
+
+
+def eliminarLibro(codigo):
+    conn = sql.connect("biblioteca.db")
+    cursor = conn.cursor()
+    query = f"DELETE FROM Libros WHERE codigo = {codigo}"
+    cursor.execute(query)
+    conn.commit()
+    conn.close()

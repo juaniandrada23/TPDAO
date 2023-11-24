@@ -95,3 +95,23 @@ def getLibrosDemorados():
     conn.close()
     array = [item[0] for item in datos]
     return array
+
+def prestamosDemorados():
+    conn = sql.connect("biblioteca.db")
+    cursor = conn.cursor()
+    query = f"SELECT * FROM Prestamos WHERE dias_retraso > 0"
+    cursor.execute(query)
+    datos = cursor.fetchall()
+    conn.commit()
+    conn.close()
+    return datos
+
+def prestamosPorSocio():
+    conn = sql.connect("biblioteca.db")
+    cursor = conn.cursor()
+    query = f"SELECT * FROM Prestamos"
+    cursor.execute(query)
+    datos = cursor.fetchall()
+    conn.commit()
+    conn.close()
+    return datos

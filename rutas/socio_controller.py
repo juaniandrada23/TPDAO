@@ -51,17 +51,10 @@ def buscarSocio(dni):
     else: 
         return False
 
-
-# if __name__ == "__main__":
-#     #createBd()
-#     #createTable()
-#     #insertarLibro(1,"Harry Potter",980,"disponible")
-#     libros = [(2,"G Beder",150,"prestado"),
-#               (3,"Paren La Hand",431,"disponible"),
-#               (4,"Don Quijote",1028,"disponible"),
-#               (5,"Fisica 2",120,"extraviado")]
-    
-#     insertarLibros(libros)
-    
-    
-#     leerDatosLibro()
+def eliminarSocio(dni):
+    conn = sql.connect("biblioteca.db")
+    cursor = conn.cursor()
+    query = f"DELETE FROM Socios WHERE dni = {dni}"
+    cursor.execute(query)
+    conn.commit()
+    conn.close()

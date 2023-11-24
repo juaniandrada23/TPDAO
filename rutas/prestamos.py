@@ -6,7 +6,7 @@ class Prestamo:
         self.codigo_libro = codigo_libro
         self.id_socio = id_socio
         self.dias = dias
-        self.fecha_prestamo = datetime.datetime(2023,9,10)
+        self.fecha_prestamo = datetime.datetime.now()
         self.fecha_devolucion = self.fecha_prestamo + timedelta(days=self.dias)
         self.dias_retraso = self.registrar_devolucion
 
@@ -39,7 +39,3 @@ class Prestamo:
     
     def getDiasRetraso(self):
         return self.dias_retraso
-
-    # def registrar_extravio(self):
-    #     if self.dias_retraso > 30:
-    #         self.estado = 'extraviado'

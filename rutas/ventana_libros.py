@@ -53,30 +53,35 @@ class VentanaCargaLibros():
         ttk.Button(botonera, text="Cancelar", command=self.ventana.destroy).place(x=154, y=20)
         ttk.Button(botonera, text="Listar", command=self.listar).place(x=300, y=20)
         ttk.Button(botonera, text="Listar Extraviados", command=self.listarExtraviados).place(x=440, y=20)
-        #ttk.Button(botonera, text="Disponibilizar", command=self.disponible).place(x=400, y=20)
-
+        
     def mostrar(self):
         self.ventana.mainloop()
 
     def aceptar(self):
-        createTableLibro()
-        codigo = int(self.codigo.get())
-        titulo = self.titulo.get()
-        precio = self.precio.get()
-        estado = self.combo.get()
-        nuevoLibro = Libro(codigo, titulo, precio, estado)
-        registrarLibro(nuevoLibro)
-        messagebox.showinfo("Libro cargado", str(nuevoLibro))
-        self.codigo.set("")
-        self.titulo.set("")
-        self.precio.set("")
-        self.estado.set("")
+        if self.codigo.get() == "" or self.titulo.get()=="" or self.precio.get()== "":
+            messagebox.showerror("Error", "Debe ingresar algo en cada campo.")
+        else:
+            if not buscarLibro(int(self.codigo.get()),self.titulo.get()):
+                createTableLibro()
+                codigo = int(self.codigo.get())
+                titulo = self.titulo.get()
+                precio = self.precio.get()
+                estado = self.combo.get()
+                nuevoLibro = Libro(codigo, titulo, precio, estado)
+                messagebox.showinfo("Libro cargado", str(nuevoLibro))
+                registrarLibro(nuevoLibro)
+                self.biblioteca.libros = leerDatosLibro()
+                self.codigo.set("")
+                self.titulo.set("")
+                self.precio.set("")
+                self.estado.set("")
+            else:
+                messagebox.showinfo("Error","El libro ya existe")
 
     def listar(self):
+        self.biblioteca.libros = leerDatosLibro()
         VentanaListadoLibros(self.biblioteca).mostrar()
     
     def listarExtraviados(self):
         VentanaListadoExtraviados(self.biblioteca).mostrar()
     
-    #def disponible(self):
-        #actualizarEstado(0,'disponible')
